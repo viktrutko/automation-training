@@ -1,10 +1,13 @@
 package model.plane;
 
-import enums.MilitaryPlaneType;
+
+import entity.MilitaryPlaneType;
+import model.plane.Plane;
 
 import java.util.Objects;
 
 public class MilitaryPlane extends Plane {
+
     private MilitaryPlaneType militaryPlaneType;
 
     public MilitaryPlane(String model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity, MilitaryPlaneType militaryPlaneType) {
@@ -16,29 +19,24 @@ public class MilitaryPlane extends Plane {
         return militaryPlaneType;
     }
 
-    public void setMilitaryPlaneType(MilitaryPlaneType militaryPlaneType) {
-        this.militaryPlaneType = militaryPlaneType;
-    }
-
     @Override
     public String toString() {
         return super.toString().replace("}",
-                ", militaryPlaneType=" + militaryPlaneType +
-                        '}');
+                ", type=" + militaryPlaneType +
+                '}');
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (!(object instanceof MilitaryPlane)) return false;
-        if (!super.equals(object)) return false;
-        MilitaryPlane militaryPlane = (MilitaryPlane) object;
-        return militaryPlaneType == militaryPlane.militaryPlaneType;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MilitaryPlane)) return false;
+        if (!super.equals(o)) return false;
+        MilitaryPlane that = (MilitaryPlane) o;
+        return militaryPlaneType == that.militaryPlaneType;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), militaryPlaneType);
     }
-
 }

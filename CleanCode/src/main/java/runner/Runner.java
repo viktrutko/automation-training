@@ -1,10 +1,6 @@
-package action;
-
-import enums.ExperimentalPlaneClassificationLevel;
-import enums.ExperimentalPlaneType;
-import enums.MilitaryPlaneType;
+package runner;
+import entity.MilitaryPlaneType;
 import model.airport.Airport;
-import model.plane.ExperimentalPlane;
 import model.plane.MilitaryPlane;
 import model.plane.PassengerPlane;
 import model.plane.Plane;
@@ -12,8 +8,15 @@ import model.plane.Plane;
 import java.util.Arrays;
 import java.util.List;
 
-public class AirportCreator {
-    private static List<Plane> planes = Arrays.asList(
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+
+public class Runner {
+    private static final Logger logger = LogManager.getLogger(Runner.class);
+
+    static List<Plane> planes = Arrays.asList(
             new PassengerPlane("Boeing-737", 900, 12000, 60500, 164),
             new PassengerPlane("Boeing-737-800", 940, 12300, 63870, 192),
             new PassengerPlane("Boeing-747", 980, 16100, 70500, 242),
@@ -27,12 +30,22 @@ public class AirportCreator {
             new MilitaryPlane("B-52 Stratofortress", 1000, 20000, 80000, MilitaryPlaneType.BOMBER),
             new MilitaryPlane("F-15", 1500, 12000, 10000, MilitaryPlaneType.FIGHTER),
             new MilitaryPlane("F-22", 1550, 13000, 11000, MilitaryPlaneType.FIGHTER),
-            new MilitaryPlane("C-130 Hercules", 650, 5000, 110000, MilitaryPlaneType.TRANSPORT),
-            new ExperimentalPlane("Bell X-14", 277, 482, 500, ExperimentalPlaneType.HIGH_ALTITUDE, ExperimentalPlaneClassificationLevel.SECRET),
-            new ExperimentalPlane("Ryan X-13 Vertijet", 560, 307, 500, ExperimentalPlaneType.VTOL, ExperimentalPlaneClassificationLevel.TOP_SECRET)
+            new MilitaryPlane("C-130 Hercules", 650, 5000, 110000, MilitaryPlaneType.TRANSPORT)
     );
 
-    public static Airport createAirportWithCredentials() {
-        return new Airport(planes);
+
+    public static void main(String[] args) {
+        Airport airport = new Airport(planes);
+        Airport militaryAirport = new Airport(airport.getMilitaryPlanes());
+        Airport passengerAirport = new Airport(airport.getPassengerPlanes());
+        logger.log(Level.INFO, "Military airport sorted by max distance: " + militaryAirport
+                .sortByMaxDistance()
+                .toString());
+        logger.log(Level.INFO, "Passenger airport sorted by max speed: " + passengerAirport
+                .sortByMaxSpeed()
+                .toString());
+        logger.log(Level.INFO, "Plane with max passenger capacity: " +
+                 passengerAirport.getPassengerPlaneWithMaxPassengersCapacity());
+    }
     }
 }

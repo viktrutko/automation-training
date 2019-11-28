@@ -1,46 +1,32 @@
 package model.plane;
 
-import enums.ExperimentalPlaneClassificationLevel;
-import enums.ExperimentalPlaneType;
+import entity.ExperimentalPlaneClassification;
+import entity.ExperimentalPlaneType;
 
 public class ExperimentalPlane extends Plane {
+
     private ExperimentalPlaneType experimentalPlaneType;
-    private ExperimentalPlaneClassificationLevel experimentalPlaneClassificationLevel;
+    private ExperimentalPlaneClassification experimentalPlaneClassification;
 
     public ExperimentalPlane(String model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity,
                              ExperimentalPlaneType experimentalPlaneType,
-                             ExperimentalPlaneClassificationLevel experimentalPlaneClassificationLevel) {
+                             ExperimentalPlaneClassification experimentalPlaneClassification) {
         super(model, maxSpeed, maxFlightDistance, maxLoadCapacity);
         this.experimentalPlaneType = experimentalPlaneType;
-        this.experimentalPlaneClassificationLevel = experimentalPlaneClassificationLevel;
+        this.experimentalPlaneClassification = experimentalPlaneClassification;
     }
 
-    public ExperimentalPlaneType getExperimentalPlaneType() {
-        return experimentalPlaneType;
+    public ExperimentalPlaneClassification getExperimentalPlaneClassification(){
+        return experimentalPlaneClassification;
     }
 
-    public void setExperimentalPlaneType(ExperimentalPlaneType experimentalPlaneType) {
-        this.experimentalPlaneType = experimentalPlaneType;
-    }
-
-    public ExperimentalPlaneClassificationLevel getExperimentalPlaneClassificationLevel() {
-        return experimentalPlaneClassificationLevel;
-    }
-
-    public void setExperimentalPlaneClassificationLevel(ExperimentalPlaneClassificationLevel experimentalPlaneClassificationLevel) {
-        this.experimentalPlaneClassificationLevel = experimentalPlaneClassificationLevel;
+    public void setClassificationLevel(ExperimentalPlaneClassification experimentalPlaneClassification){
+        this.experimentalPlaneClassification = experimentalPlaneClassification;
     }
 
     @Override
-    public String toString() {
-        return "ExperimentalPlane{" +
-                "model='" + getModel() + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        return super.equals(object);
+    public boolean equals(Object o) {
+        return super.equals(o);
     }
 
     @Override
@@ -48,4 +34,10 @@ public class ExperimentalPlane extends Plane {
         return super.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return "experimentalPlane{" +
+                "model='" + getModel() + '\'' +
+                '}';
+    }
 }
