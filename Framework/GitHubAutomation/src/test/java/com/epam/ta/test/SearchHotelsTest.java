@@ -28,11 +28,32 @@ public class SearchHotelsTest extends CommonConditions {
     public void thereIsMessageNonexistentPlace()
     {
         SearchQuery searchQuery = SearchQueryCreator.withNonexistent();
-        String messageOfEmptyPlaceError = new HomeHRSPage(driver)
+        String messageOfNonexistantPlaceError = new HomeHRSPage(driver)
                 .openPage()
                 .searchHotelWithTermsAndDefaultDate(searchQuery)
                 .messageOfNonexistantPlaceError();
 
-        assertThat(messageOfEmptyPlaceError, is(equalTo("Примечание")));
+        assertThat(messageOfNonexistantPlaceError, is(equalTo("Примечание")));
+    }
+
+    @Test
+    public void searchHotelWithDifferentNumberOfRoomsAndPersons(){
+        SearchQuery searchQuery = SearchQueryCreator.withDifferentNumberOfRoomsAndPersons();
+        String messageOfDifferentNumberOfRoomsAndPersons = new HomeHRSPage(driver)
+                .openPage()
+                .searchOfDifferentNumberOfRoomsAndPersons(searchQuery)
+                .messageOfDifferentNumberOfRoomsAndPersonsError();
+        assertThat(messageOfDifferentNumberOfRoomsAndPersons,is(equalTo("Число комнат не соответствует числу проживающих.")));
+    }
+
+    @Test
+    public void searchHotelWithEmptyNumberOfRooms(){
+        SearchQuery searchQuery = SearchQueryCreator.withEmptyNumberOfRooms();
+        String messageOfEmptyNumberOfRooms = new HomeHRSPage(driver)
+                .openPage()
+                .searchNumberOfRoomsAndPersons(searchQuery)
+                .messageOfEmptyNumberOfRoomsError();
+        assertThat(messageOfEmptyNumberOfRooms,is(equalTo("Введите необходимое число комнат.")));
     }
 }
+

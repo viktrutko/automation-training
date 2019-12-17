@@ -8,18 +8,47 @@ public class SearchQuery {
     private String arrivalDate;
     private String departureDate;
     private String travelingPersons;
+    private Integer numberOfSingleRooms;
+    private Integer numberOfAdults;
 
-    public SearchQuery(String place, String arrivalDate, String departureDate, String travelingPersons) {
+    public SearchQuery(String place, String arrivalDate, String departureDate, String travelingPersons, Integer numberOfSingleRooms, Integer numberOfAdults) {
         this.place = place;
         this.arrivalDate = arrivalDate;
         this.departureDate = departureDate;
         this.travelingPersons = travelingPersons;
+        this.numberOfSingleRooms = numberOfSingleRooms;
+        this.numberOfAdults = numberOfAdults;
     }
 
-    public SearchQuery(String arrivalDate, String departureDate, String travelingPersons) {
-        this.arrivalDate = arrivalDate;
-        this.departureDate = departureDate;
-        this.travelingPersons = travelingPersons;
+
+    @Override
+    public String toString() {
+        return "SearchQuery{" +
+                "place='" + place + '\'' +
+                ", arrivalDate='" + arrivalDate + '\'' +
+                ", departureDate='" + departureDate + '\'' +
+                ", travelingPersons='" + travelingPersons + '\'' +
+                ", numberOfSingleRooms=" + numberOfSingleRooms +
+                ", numberOfAdults=" + numberOfAdults +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SearchQuery that = (SearchQuery) o;
+        return Objects.equals(place, that.place) &&
+                Objects.equals(arrivalDate, that.arrivalDate) &&
+                Objects.equals(departureDate, that.departureDate) &&
+                Objects.equals(travelingPersons, that.travelingPersons) &&
+                Objects.equals(numberOfSingleRooms, that.numberOfSingleRooms) &&
+                Objects.equals(numberOfAdults, that.numberOfAdults);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(place, arrivalDate, departureDate, travelingPersons, numberOfSingleRooms, numberOfAdults);
     }
 
     public String getPlace() {
@@ -54,31 +83,22 @@ public class SearchQuery {
         this.travelingPersons = travelingPersons;
     }
 
-    @Override
-    public String toString() {
-        return "SearchQuery{" +
-                "place='" + place + '\'' +
-                ", arrivalDate='" + arrivalDate + '\'' +
-                ", departureDate='" + departureDate + '\'' +
-                ", travelingPersons='" + travelingPersons + '\'' +
-                '}';
+    public Integer getNumberOfSingleRooms() {
+        return numberOfSingleRooms;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SearchQuery that = (SearchQuery) o;
-        return Objects.equals(place, that.place) &&
-                Objects.equals(arrivalDate, that.arrivalDate) &&
-                Objects.equals(departureDate, that.departureDate) &&
-                Objects.equals(travelingPersons, that.travelingPersons);
+    public void setNumberOfSingleRooms(Integer numberOfSingleRooms) {
+        this.numberOfSingleRooms = numberOfSingleRooms;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(place, arrivalDate, departureDate, travelingPersons);
+    public Integer getNumberOfAdults() {
+        return numberOfAdults;
     }
+
+    public void setNumberOfAdults(Integer numberOfAdults) {
+        this.numberOfAdults = numberOfAdults;
+    }
+
 }
 
 

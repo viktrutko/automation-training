@@ -1,6 +1,7 @@
 package test;
 
 
+import org.hamcrest.Matchers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -32,7 +33,7 @@ public class SearchHotelsTest {
     @Test
     public void thereIsMessageOfEmptyPlace()
     {
-        SearchQuery searchQuery = new SearchQuery("Москва","20.01.2020","21.01.2020","1 взрослый, 1 одноместный номер");
+        SearchQuery searchQuery = new SearchQuery("Москва","20.01.2020","21.01.2020","1 взрослый, 1 одноместный номер",2,2);
         String messageOfEmptyPlaceError = new HomeHRSPage(driver)
                 .openPage()
                 .searchHotelWithEmptyPlace(searchQuery)
@@ -44,12 +45,22 @@ public class SearchHotelsTest {
     @Test
     public void thereIsMessageNonexistentPlace()
     {
-        SearchQuery searchQuery = new SearchQuery("Qqqqqqqqqqq","20.01.2020","21.01.2020","1 взрослый, 1 одноместный номер");
+        SearchQuery searchQuery = new SearchQuery("Qqqqqqqqqqq","20.01.2020","21.01.2020","1 взрослый, 1 одноместный номер",2,3);
         String messageOfNonexistantPlaceError = new HomeHRSPage(driver)
                 .openPage()
                 .searchHotelWithTermsAndDefaultDate(searchQuery)
                 .messageOfNonexistantPlaceError();
 
         assertThat(messageOfNonexistantPlaceError, is(equalTo("Примечание")));
+    }
+
+    @Test
+    public void searchHotelWithDifferentNumberOfRoomsAndPersons(){
+        SearchQuery searchQuery = new SearchQuery("Москва","20.01.2020","21.01.2020","Другие опции / дети",3,4);
+        String messageOfDifferentNumberOfRoomsAndPersons = new HomeHRSPage(driver)
+                .openPage()
+                .searchOfDifferentNumberOfRoomsAndPersons(searchQuery)
+                .messageOfDifferentNumberOfRoomsAndPersonsError();
+        assertThat(messageOfDifferentNumberOfRoomsAndPersons,is(Matchers.equalTo("Число комнат не соответствует числу проживающих.")));
     }
 }
