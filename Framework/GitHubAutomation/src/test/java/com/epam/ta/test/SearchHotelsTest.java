@@ -55,5 +55,45 @@ public class SearchHotelsTest extends CommonConditions {
                 .messageOfEmptyNumberOfRoomsError();
         assertThat(messageOfEmptyNumberOfRooms,is(equalTo("Введите необходимое число комнат.")));
     }
+
+    @Test
+    public void searchHotelWhenDepartureDateBeforeArrivalDate(){
+        SearchQuery testSearchQueryMain = SearchQueryCreator.withDepartureDateBeforeArrivalDate();
+        String resultArrivalDate = new HomeHRSPage(driver)
+                .openPage()
+                .searchHotelForMainTerms(testSearchQueryMain)
+                .changedDepartureDateTerm();
+        assertThat(resultArrivalDate, is(equalTo("18/01/2020")));
+    }
+
+    @Test
+    public void searchHotelMoreChildrenThanRooms(){
+        SearchQuery searchQuery = SearchQueryCreator.withMoreChildrenThanRooms();
+        String messageOfMoreChildrenThanRooms = new HomeHRSPage(driver)
+                .openPage()
+                .searchMoreChildrenThanRooms(searchQuery)
+                .messageOfMoreChildrenThanRoomsError();
+        assertThat(messageOfMoreChildrenThanRooms,is(equalTo("Возможно размещение только 2 детей в двухместном номере.")));
+    }
+
+    @Test
+    public void searchHotelChildrenAge(){
+        SearchQuery searchQuery = SearchQueryCreator.withMoreChildrenThanRooms();
+        String messageOfChildrenAge = new HomeHRSPage(driver)
+                .openPage()
+                .searchChildrenAge(searchQuery)
+                .messageOfChildrenAgeError();
+        assertThat(messageOfChildrenAge,is(equalTo("Укажите возраст сопровождающих Вас детей.")));
+    }
+    @Test
+    public void searchHotelWithEmptyNumberOfPerson(){
+        SearchQuery searchQuery = SearchQueryCreator.withEmptyNumberOfPerson();
+        String messageOfEmptyNumberOfPerson = new HomeHRSPage(driver)
+                .openPage()
+                .searchNumberOfRoomsAndPersons(searchQuery)
+                .messageOfDifferentNumberOfRoomsAndPersonsError();
+        assertThat(messageOfEmptyNumberOfPerson,is(equalTo("Число комнат не соответствует числу проживающих.")));
+    }
+
 }
 

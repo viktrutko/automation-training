@@ -4,12 +4,39 @@ import java.util.Objects;
 
 public class SearchQuery {
 
+
     private String place;
     private String arrivalDate;
     private String departureDate;
     private String travelingPersons;
     private Integer numberOfSingleRooms;
     private Integer numberOfAdults;
+    private Integer numberOfDoubleRooms;
+    private Integer numberOfChildren;
+
+    public SearchQuery(String place, String travelingPersons, Integer numberOfSingleRooms, Integer numberOfDoubleRooms, Integer numberOfChildren) {
+        this.place = place;
+        this.travelingPersons = travelingPersons;
+        this.numberOfSingleRooms = numberOfSingleRooms;
+        this.numberOfDoubleRooms = numberOfDoubleRooms;
+        this.numberOfChildren = numberOfChildren;
+    }
+
+    public Integer getNumberOfDoubleRooms() {
+        return numberOfDoubleRooms;
+    }
+
+    public void setNumberOfDoubleRooms(Integer numberOfDoubleRooms) {
+        this.numberOfDoubleRooms = numberOfDoubleRooms;
+    }
+
+    public Integer getNumberOfChildren() {
+        return numberOfChildren;
+    }
+
+    public void setNumberOfChildren(Integer numberOfChildren) {
+        this.numberOfChildren = numberOfChildren;
+    }
 
     public SearchQuery(String place, String arrivalDate, String departureDate, String travelingPersons, Integer numberOfSingleRooms, Integer numberOfAdults) {
         this.place = place;

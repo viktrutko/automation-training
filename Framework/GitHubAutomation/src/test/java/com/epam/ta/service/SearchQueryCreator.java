@@ -17,6 +17,10 @@ public class SearchQueryCreator {
     public static final String TESTDATA_SEARCHQUERY_ADULT_WITHOUT = "testdata.searchQuery.adultWithout";
     public static final String TESTDATA_SEARCHQUERY_ARRIVAL_DATE_WITHOUT = "testdata.searchQuery.arrivalDateWithout";
     public static final String TESTDATA_SEARCHQUERY_DEPARTURE_DATE_WITHOUT = "testdata.searchQuery.departureDateWithout";
+    public static final String TESTDATA_SEARCHQAERY_DEPARTURE_DATE_BEFORE_ARRIVAL_DATE="testdata.searchQuery.departureDateBeforeArrivalDate";
+    public static final String TESTDATA_SEARCHQUERY_DOUBLE_ROOM_WITHOUT = "testdata.searchQuery.doubleRoomWithout";
+    public static final String TESTDATA_SEARCHQUERY_CHILDREN = "testdata.searchQuery.children";
+
 
 
     public static SearchQuery withCredentialsFromProperty(){
@@ -63,4 +67,29 @@ public class SearchQueryCreator {
                 Integer.parseInt(TestDataReader.getTestData(TESTDATA_SEARCHQUERY_SINGLE_ROOM_WITHOUT)),
                 Integer.parseInt(TestDataReader.getTestData(TESTDATA_SEARCHQUERY_ADULT_WITHOUT)));
     }
+
+    public static SearchQuery withDepartureDateBeforeArrivalDate(){
+        return new SearchQuery(TestDataReader.getTestData(TESTDATA_SEARCHQUERY_PLACE),
+                TestDataReader.getTestData(TESTDATA_SEARCHQUERY_ARRIVAL_DATE),
+                TestDataReader.getTestData(TESTDATA_SEARCHQAERY_DEPARTURE_DATE_BEFORE_ARRIVAL_DATE),
+                TestDataReader.getTestData(TESTDATA_SEARCHQUERY_TRAVELING_PERSONS_OTHERS),
+                Integer.parseInt(TestDataReader.getTestData(TESTDATA_SEARCHQUERY_SINGLE_ROOM_WITHOUT)),
+                Integer.parseInt(TestDataReader.getTestData(TESTDATA_SEARCHQUERY_ADULT_WITHOUT)));
+    }
+    public static SearchQuery withMoreChildrenThanRooms(){
+        return new SearchQuery(TestDataReader.getTestData(TESTDATA_SEARCHQUERY_PLACE),
+                TestDataReader.getTestData(TESTDATA_SEARCHQUERY_TRAVELING_PERSONS_OTHERS),
+                Integer.parseInt(TestDataReader.getTestData(TESTDATA_SEARCHQUERY_SINGLE_ROOM_WITHOUT)),
+                Integer.parseInt(TestDataReader.getTestData(TESTDATA_SEARCHQUERY_DOUBLE_ROOM_WITHOUT)),
+                Integer.parseInt(TestDataReader.getTestData(TESTDATA_SEARCHQUERY_CHILDREN)));
+    }
+    public static SearchQuery withEmptyNumberOfPerson(){
+        return new SearchQuery(TestDataReader.getTestData(TESTDATA_SEARCHQUERY_PLACE),
+                TestDataReader.getTestData(TESTDATA_SEARCHQUERY_ARRIVAL_DATE_WITHOUT),
+                TestDataReader.getTestData(TESTDATA_SEARCHQUERY_DEPARTURE_DATE_WITHOUT),
+                TestDataReader.getTestData(TESTDATA_SEARCHQUERY_TRAVELING_PERSONS_OTHERS),
+                Integer.parseInt(TestDataReader.getTestData(TESTDATA_SEARCHQUERY_SINGLE_ROOM)),
+                Integer.parseInt(TestDataReader.getTestData(TESTDATA_SEARCHQUERY_ADULT_WITHOUT)));
+    }
+
 }
