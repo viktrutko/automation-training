@@ -67,5 +67,23 @@ public class SearchHotelsForDifferentTermsTest extends CommonConditions {
                 .getTextOfFreeBreakfastMark();
         Assert.assertTrue(textOfFreeBreakfastMark.contains("Бесплатный завтрак"));
     }
+    @Test
+    public void searchHotelWithoutArrivalAndDepartureDate(){
+        Hotel testSearchQueryMain = HotelCreator.withoutArrivalAndDepartureDate();
+        String textOfNoteToInputDates = new HotelsHomePage(driver)
+                .openPage()
+                .searchHotelForMainTerms(testSearchQueryMain)
+                .getTextOfNotesToInputDates();
+        assertThat(textOfNoteToInputDates, is(equalTo("Введите даты")));
+    }
+    @Test
+    public void searchHotelForGroup(){
+        Hotel testSearchQueryMain = HotelCreator.forGroup();
+        String textOfButtonToSubmitFormForGroup = new HotelsHomePage(driver)
+                .openPage()
+                .searchHotelForGroup(testSearchQueryMain)
+                .thereIsSubmitButton();
+        assertThat(textOfButtonToSubmitFormForGroup, is(equalTo("Отправить")));
+    }
 
 }
